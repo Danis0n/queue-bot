@@ -44,12 +44,12 @@ public class MenuService {
         List<KeyboardRow> keyboard = new ArrayList<>();
 
         KeyboardRow adminPanel = new KeyboardRow();
-        adminPanel.add(new KeyboardButton("Все пользователи"));
+        adminPanel.add(new KeyboardButton("Р’СЃРµ РїРѕР»СЊР·РѕРІР°С‚РµР»Рё"));
         keyboard.add(adminPanel);
 
         KeyboardRow aboutPanel = new KeyboardRow();
-        aboutPanel.add(new KeyboardButton("Об авторе"));
-        aboutPanel.add(new KeyboardButton("Помощь"));
+        aboutPanel.add(new KeyboardButton("РћР± Р°РІС‚РѕСЂРµ"));
+        aboutPanel.add(new KeyboardButton("РџРѕРјРѕС‰СЊ"));
         keyboard.add(aboutPanel);
 
         replyKeyboardMarkup.setKeyboard(keyboard);

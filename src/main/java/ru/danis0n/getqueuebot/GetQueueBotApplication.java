@@ -9,5 +9,4 @@ public class GetQueueBotApplication {
     public static void main(String[] args) {
         SpringApplication.run(GetQueueBotApplication.class, args);
     }
-
 }

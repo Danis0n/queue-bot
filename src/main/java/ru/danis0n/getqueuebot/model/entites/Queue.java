@@ -18,9 +18,9 @@ public class Queue {
 
     @Id
     @Column(name = "lesson_id")
-    int lesson_id;
+    long lesson_id;
     @Column(name = "user_id")
-    int user_id;
+    long user_id;
 
     @Override
     public String toString() {

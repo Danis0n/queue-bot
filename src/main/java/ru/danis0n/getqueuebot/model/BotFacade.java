@@ -10,19 +10,16 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import ru.danis0n.getqueuebot.model.context.BotStateContext;
 import ru.danis0n.getqueuebot.model.handler.CallbackQueryHandler;
-import ru.danis0n.getqueuebot.model.handler.MessageHandler;
 
 @Component
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class BotFacade {
 
-    final MessageHandler messageHandler;
+    final BotStateContext botStateContext;
     final CallbackQueryHandler callbackQueryHandler;
-
-    @Value("${telegrambot.adminId}")
-    int adminId;
 
     public SendMessage handleUpdate(Update update) {
         if(update.hasCallbackQuery()){
@@ -38,6 +35,6 @@ public class BotFacade {
     }
 
     private SendMessage handleInputMessage(Message message) {
-        return null;
+        return botStateContext.executeContext(message);
     }
 }
