@@ -18,7 +18,5 @@ public enum BotState {
     public String getName(){
         return name();
     }
-
-
-
+    
 }

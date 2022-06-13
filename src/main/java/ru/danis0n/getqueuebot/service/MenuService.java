@@ -17,11 +17,6 @@ import java.util.List;
 @NoArgsConstructor
 public class MenuService {
 
-    public SendMessage getMainMenuMessage(final long chatId, String textMessage, final long userId){
-        final ReplyKeyboardMarkup replyKeyboardMarkup = getMainMenuKeyboard(userId);
-        return createMessageWithKeyboard(chatId, textMessage, replyKeyboardMarkup);
-    }
-
     private SendMessage createMessageWithKeyboard(final long chatId, String textMessage,
                                                   final ReplyKeyboardMarkup replyKeyboardMarkup)
     {
@@ -35,6 +30,12 @@ public class MenuService {
         return sendMessage;
     }
 
+    public SendMessage getMainMenuMessage(final long chatId, String textMessage, final long userId){
+        final ReplyKeyboardMarkup replyKeyboardMarkup = getMainMenuKeyboard(userId);
+        return createMessageWithKeyboard(chatId, textMessage, replyKeyboardMarkup);
+    }
+
+    // TODO : add admin panel check
     private ReplyKeyboardMarkup getMainMenuKeyboard(long userId){
         final ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
         replyKeyboardMarkup.setSelective(true);
