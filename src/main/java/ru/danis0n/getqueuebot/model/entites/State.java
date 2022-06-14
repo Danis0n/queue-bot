@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Proxy(lazy = false)
 @Table(name = "bot_states")
 public class State {
@@ -25,7 +26,7 @@ public class State {
     @Column(name = "state_name")
     String botState;
 
-    public BotState getBotStateEnum(String botState){
+    static public BotState getBotStateEnum(String botState){
         return BotState.valueOf(botState);
     }
 

@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import ru.danis0n.getqueuebot.dao.StateDAO;
@@ -38,6 +39,8 @@ public class StateManager {
         stateStrategy.put("/start", BotState.START);
         stateStrategy.put("Помощь", BotState.HELP);
         stateStrategy.put("Все пользователи", BotState.SHOWUSERS);
+        stateStrategy.put("Об авторе", BotState.ABOUT);
+        stateStrategy.put("Доступные предметы",BotState.SHOWLESSONS);
     }
 
     // TODO : improve for better saving..
@@ -61,7 +64,7 @@ public class StateManager {
         State state = userDAO.findByUserId(userId).getState();
         String tmpState = state.getBotState();
         return stateStrategy.get(inputMsg) == null ?
-                state.getBotStateEnum(tmpState): stateStrategy.get(inputMsg);
+                State.getBotStateEnum(tmpState): stateStrategy.get(inputMsg);
     }
 
     public BotState getUpdateState(long userId, String inputMsg){
@@ -77,13 +80,14 @@ public class StateManager {
         return searchState;
     }
 
-    public SendMessage executeContext(Message message){
+    public BotApiMethod<?> executeContext(Message message){
         long userId = message.getFrom().getId();
         String inputMsg = message.getText();
 
         if(!userDAO.isExistById(userId)){
             return saveNewUser(message,userId);
         }
+
         BotState botState = getUpdateState(userId, inputMsg);
         return menuManager.executeContext(botState, message, userId);
     }

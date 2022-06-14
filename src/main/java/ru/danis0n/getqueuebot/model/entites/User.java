@@ -1,6 +1,7 @@
 package ru.danis0n.getqueuebot.model.entites;
 
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 
@@ -8,19 +9,20 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "users")
 public class User {
 
     @Id
     @Column(name = "user_id", nullable = false)
-    private long id;
+    long id;
 
     @Column(name = "user_name")
-    private String name;
+    String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_state")
-    private State state;
+    State state;
 
     @Override
     public String toString() {
